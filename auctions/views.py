@@ -61,3 +61,21 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+def categories(request):
+    return render(request, "auctions/categories.html")
+
+
+def watchlist(request):
+    # if no user is signed in, return to login page:
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("login"))
+    return render(request, "auctions/watchlist.html")
+
+
+def create_listing(request):
+    # if no user is signed in, return to login page:
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("login"))
+    return render(request, "auctions/create_listing.html")
