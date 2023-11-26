@@ -7,4 +7,4 @@ class User(AbstractUser):
 
 # class auction_listings():
 # class bids():
-# class comments():
+# class comments():u

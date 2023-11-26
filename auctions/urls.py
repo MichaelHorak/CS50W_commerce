@@ -2,12 +2,14 @@ from django.urls import path
 
 from . import views
 
+app_name = "auctions"
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.index_view, name="index"),
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
-    path("register", views.register, name="register"),
-    path("categories", views.categories, name="categories"),
-    path("watchlist", views.watchlist, name="watchlist"),
-    path("create listing", views.create_listing, name="create listing")
+    path("register", views.register_view, name="register"),
+    path("categories", views.categories_view, name="categories"),
+    path("watchlist", views.watchlist_view, name="watchlist"),
+    path("create listing", views.create_listing_view, name="create listing"),
+    path("closed listings", views.closed_listings_view, name="closed listings")
 ]

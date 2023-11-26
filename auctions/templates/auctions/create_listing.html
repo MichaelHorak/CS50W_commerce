@@ -2,10 +2,12 @@
 
 {% block body %}
 
-    <div>Form to create a listing in progress.</div>
-
-    <form action="/auctions/">
-
+    <h2>Add a listing:</h2>
+    <form action="{% url 'auctions:create listing' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit">
     </form>
 
+    <a href="{% url 'auctions:index' %}">View Listings</a>
 {% endblock %}
