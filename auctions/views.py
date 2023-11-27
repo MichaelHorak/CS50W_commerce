@@ -28,9 +28,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-
-            # redirect to the next parameter or the index if not present
-            return HttpResponseRedirect(reverse("auctions:index"))
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/login.html", {
                 "message": "Invalid username and/or password."
@@ -74,14 +72,14 @@ def register_view(request):
 def categories_view(request):
     return render(request, "auctions/categories.html")
 
-
+@login_required
 def watchlist_view(request):
     # if no user is signed in, return to login page:
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("auctions:login"))
     return render(request, "auctions/watchlist.html")
 
-
+@login_required
 def create_listing_view(request):
     if request.method == "POST":
         # Take in the data the user submitted and save it as form
@@ -101,7 +99,9 @@ def create_listing_view(request):
 
     # if the user is not authenticated, redirect to login with the next param
     if not request.user.is_authenticated:
-        return redirect('auctions:login')
+        # return redirect('auctions:login')
+        login_url = reverse("login") + f'?next={request.path}'
+        return redirect(login_url)
 
     return render(request, "auctions/create_listing.html", {
         "form": NewListingForm()
